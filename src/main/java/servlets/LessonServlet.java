@@ -11,6 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class LessonServlet extends HttpServlet {
@@ -45,7 +48,7 @@ public class LessonServlet extends HttpServlet {
             int instructorId = Integer.parseInt(request.getParameter("instructorId"));
             int vehicleId = Integer.parseInt(request.getParameter("vehicleId"));
             Date lessonDate = Date.valueOf(request.getParameter("lessonDate"));
-            Time lessonTime = Time.valueOf(request.getParameter("lessonTime"));
+            Time lessonTime = parseLessonTime(request.getParameter("lessonTime"));
             int duration = Integer.parseInt(request.getParameter("duration"));
             String status = request.getParameter("status");
             String notes = request.getParameter("notes");
@@ -60,12 +63,25 @@ public class LessonServlet extends HttpServlet {
             lesson.setInstructorId(Integer.parseInt(request.getParameter("instructorId")));
             lesson.setVehicleId(Integer.parseInt(request.getParameter("vehicleId")));
             lesson.setLessonDate(Date.valueOf(request.getParameter("lessonDate")));
-            lesson.setLessonTime(Time.valueOf(request.getParameter("lessonTime")));
+            lesson.setLessonTime(parseLessonTime(request.getParameter("lessonTime")));
             lesson.setDuration(Integer.parseInt(request.getParameter("duration")));
             lesson.setStatus(request.getParameter("status"));
             lesson.setNotes(request.getParameter("notes"));
             lessonDAO.update(lesson);
             response.sendRedirect("LessonServlet?action=list");
+        }
+    }
+
+    private Time parseLessonTime(String lessonTimeParam) {
+        if (lessonTimeParam == null || lessonTimeParam.trim().isEmpty()) {
+            return null;
+        }
+
+        String value = lessonTimeParam.trim();
+        try {
+            return Time.valueOf(LocalTime.parse(value, DateTimeFormatter.ofPattern("HH:mm")));
+        } catch (DateTimeParseException ignored) {
+            return Time.valueOf(LocalTime.parse(value, DateTimeFormatter.ofPattern("HH:mm:ss")));
         }
     }
 }
