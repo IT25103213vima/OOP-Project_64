@@ -1,7 +1,107 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         version="4.0">
 
-<web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <!-- Servlet Mappings -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StudentServlet</servlet-name>
+    <servlet-class>servlets.StudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <url-pattern>/StudentServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>InstructorServlet</servlet-name>
+    <servlet-class>servlets.InstructorServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InstructorServlet</servlet-name>
+    <url-pattern>/InstructorServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>VehicleServlet</servlet-name>
+    <servlet-class>servlets.VehicleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VehicleServlet</servlet-name>
+    <url-pattern>/VehicleServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LessonServlet</servlet-name>
+    <servlet-class>servlets.LessonServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LessonServlet</servlet-name>
+    <url-pattern>/LessonServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PaymentServlet</servlet-name>
+    <servlet-class>servlets.PaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaymentServlet</servlet-name>
+    <url-pattern>/PaymentServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>StudentDashboardServlet</servlet-name>
+    <servlet-class>servlets.StudentDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentDashboardServlet</servlet-name>
+    <url-pattern>/StudentDashboardServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>InstructorDashboardServlet</servlet-name>
+    <servlet-class>servlets.InstructorDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InstructorDashboardServlet</servlet-name>
+    <url-pattern>/InstructorDashboardServlet</url-pattern>
+  </servlet-mapping>
+
+  <!-- Session Config -->
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+
+  <!-- Filters -->
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>servlets.AuthFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+
 </web-app>
