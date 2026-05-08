@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class VehicleServlet extends HttpServlet {
-    private VehicleDAO vehicleDAO = new VehicleDAOImpl();
+    private final VehicleDAO vehicleDAO = new VehicleDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,27 +36,25 @@ public class VehicleServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
         if ("add".equals(action)) {
-            String make = request.getParameter("make");
+            String vehicleName = request.getParameter("vehicleName");
             String model = request.getParameter("model");
             int year = Integer.parseInt(request.getParameter("year"));
             String licensePlate = request.getParameter("licensePlate");
-            int capacity = Integer.parseInt(request.getParameter("capacity"));
             String status = request.getParameter("status");
 
-            Vehicle vehicle = new Vehicle(0, make, model, year, licensePlate, capacity, status);
+            Vehicle vehicle = new Vehicle(0, vehicleName, model, year, licensePlate, status);
             vehicleDAO.create(vehicle);
             response.sendRedirect("VehicleServlet?action=list");
         } else if ("update".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             Vehicle vehicle = vehicleDAO.read(id);
-            vehicle.setMake(request.getParameter("make"));
+            vehicle.setVehicleName(request.getParameter("vehicleName"));
             vehicle.setModel(request.getParameter("model"));
             vehicle.setYear(Integer.parseInt(request.getParameter("year")));
             vehicle.setLicensePlate(request.getParameter("licensePlate"));
-            vehicle.setCapacity(Integer.parseInt(request.getParameter("capacity")));
             vehicle.setStatus(request.getParameter("status"));
             vehicleDAO.update(vehicle);
             response.sendRedirect("VehicleServlet?action=list");

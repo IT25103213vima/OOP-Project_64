@@ -2,22 +2,20 @@ package models;
 
 public class Vehicle {
     private int id;
-    private String make;
+    private String vehicleName;
     private String model;
     private int year;
     private String licensePlate;
-    private int capacity;
     private String status;
 
     public Vehicle() {}
 
-    public Vehicle(int id, String make, String model, int year, String licensePlate, int capacity, String status) {
+    public Vehicle(int id, String vehicleName, String model, int year, String licensePlate, String status) {
         this.id = id;
-        this.make = make;
+        this.vehicleName = vehicleName;
         this.model = model;
         this.year = year;
         this.licensePlate = licensePlate;
-        this.capacity = capacity;
         this.status = status;
     }
 
@@ -25,8 +23,8 @@ public class Vehicle {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public String getMake() { return make; }
-    public void setMake(String make) { this.make = make; }
+    public String getVehicleName() { return vehicleName; }
+    public void setVehicleName(String vehicleName) { this.vehicleName = vehicleName; }
 
     public String getModel() { return model; }
     public void setModel(String model) { this.model = model; }
@@ -37,8 +35,6 @@ public class Vehicle {
     public String getLicensePlate() { return licensePlate; }
     public void setLicensePlate(String licensePlate) { this.licensePlate = licensePlate; }
 
-    public int getCapacity() { return capacity; }
-    public void setCapacity(int capacity) { this.capacity = capacity; }
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }

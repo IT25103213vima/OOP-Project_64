@@ -1,1 +1,3 @@
-1,car,nissan,2008,9878,1000,available
+1,car,nissan,2008,9878,available
+2,bike,honda,2015,8435,available
+3,Bus,TATA,2010,NC-6759,maintenance

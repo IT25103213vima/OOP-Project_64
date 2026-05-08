@@ -3,10 +3,14 @@
 <head>
     <title>Edit Instructor</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         .form-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; }
-        button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; }
+        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+        .button-container { display: flex; gap: 10px; margin-top: 20px; }
+        button { flex: 1; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        .back-btn { background: #6c757d; text-decoration: none; padding: 10px; border-radius: 4px; text-align: center; color: white; font-weight: bold; }
+        .back-btn:hover { background: #5a6268; }
     </style>
 </head>
 <body>
@@ -20,9 +24,11 @@
             <input type="text" name="phone" value="${instructor.phone}">
             <input type="text" name="address" value="${instructor.address}">
             <input type="text" name="licenseNumber" value="${instructor.licenseNumber}" required>
-            <button type="submit">Update Instructor</button>
+            <div class="button-container">
+                <button type="submit">Update Instructor</button>
+                <a href="InstructorServlet?action=list" class="back-btn">Back to Dashboard</a>
+            </div>
         </form>
-        <a href="InstructorServlet?action=list">Back</a>
     </div>
 </body>
 </html>

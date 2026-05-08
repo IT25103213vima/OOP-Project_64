@@ -2,7 +2,10 @@ package servlets;
 
 import dao.PaymentDAO;
 import dao.PaymentDAOImpl;
+import dao.StudentDAO;
+import dao.StudentDAOImpl;
 import models.Payment;
+import models.Student;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,31 +17,36 @@ import java.sql.Date;
 import java.util.List;
 
 public class PaymentServlet extends HttpServlet {
-    private PaymentDAO paymentDAO = new PaymentDAOImpl();
+    private final PaymentDAO paymentDAO = new PaymentDAOImpl();
+    private final StudentDAO studentDAO = new StudentDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if ("list".equals(action) || action == null) {
             List<Payment> payments = paymentDAO.getAll();
+            List<Student> students = studentDAO.getAll();
             request.setAttribute("payments", payments);
+            request.setAttribute("students", students);
             request.getRequestDispatcher("admin/payments.jsp").forward(request, response);
         } else if ("edit".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             Payment payment = paymentDAO.read(id);
             request.setAttribute("payment", payment);
+            request.setAttribute("students", studentDAO.getAll());
             request.getRequestDispatcher("admin/editPayment.jsp").forward(request, response);
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             paymentDAO.delete(id);
             response.sendRedirect("PaymentServlet?action=list");
         } else if ("add".equals(action)) {
+            request.setAttribute("students", studentDAO.getAll());
             request.getRequestDispatcher("admin/addPayment.jsp").forward(request, response);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
         if ("add".equals(action)) {
             int studentId = Integer.parseInt(request.getParameter("studentId"));

@@ -6,6 +6,9 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
         .dashboard { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
+        .logout-btn { padding: 10px 15px; background-color: #dc3545; color: white; border-radius: 4px; text-decoration: none; font-weight: bold; }
+        .logout-btn:hover { background-color: #c82333; }
         table { width: 100%; border-collapse: collapse; background: white; }
         th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
         th { background-color: #f2f2f2; }
@@ -14,15 +17,29 @@
 <body>
     <div class="dashboard">
         <h1>Student Dashboard</h1>
-        <a href="LogoutServlet">Logout</a>
+        <div class="header-buttons">
+            <a href="LogoutServlet" class="logout-btn">Logout</a>
+        </div>
         <h2>My Lessons</h2>
         <table>
             <tr><th>ID</th><th>Instructor</th><th>Vehicle</th><th>Date</th><th>Time</th><th>Status</th></tr>
             <c:forEach var="lesson" items="${lessons}">
+                <c:set var="instructorName" value="Unknown"/>
+                <c:set var="vehicleName" value="Unknown"/>
+                <c:forEach var="instructor" items="${instructors}">
+                    <c:if test="${instructor.id == lesson.instructorId}">
+                        <c:set var="instructorName" value="${instructor.firstName} ${instructor.lastName}"/>
+                    </c:if>
+                </c:forEach>
+                <c:forEach var="vehicle" items="${vehicles}">
+                    <c:if test="${vehicle.id == lesson.vehicleId}">
+                        <c:set var="vehicleName" value="${vehicle.vehicleName} ${vehicle.model}"/>
+                    </c:if>
+                </c:forEach>
                 <tr>
                     <td>${lesson.id}</td>
-                    <td>${lesson.instructorId}</td>
-                    <td>${lesson.vehicleId}</td>
+                    <td>${instructorName}</td>
+                    <td>${vehicleName}</td>
                     <td>${lesson.lessonDate}</td>
                     <td>${lesson.lessonTime}</td>
                     <td>${lesson.status}</td>

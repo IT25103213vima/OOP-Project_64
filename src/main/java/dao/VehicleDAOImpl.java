@@ -12,8 +12,8 @@ public class VehicleDAOImpl implements VehicleDAO {
     public void create(Vehicle vehicle) {
         int nextId = FileUtil.getNextId(FILE_NAME);
         vehicle.setId(nextId);
-        String line = vehicle.getId() + "," + vehicle.getMake() + "," + vehicle.getModel() + "," + vehicle.getYear() + "," +
-                vehicle.getLicensePlate() + "," + vehicle.getCapacity() + "," + vehicle.getStatus();
+        String line = vehicle.getId() + "," + vehicle.getVehicleName() + "," + vehicle.getModel() + "," + vehicle.getYear() + "," +
+                vehicle.getLicensePlate() + "," + vehicle.getStatus();
         FileUtil.appendLine(FILE_NAME, line);
     }
 
@@ -22,8 +22,8 @@ public class VehicleDAOImpl implements VehicleDAO {
         List<String> lines = FileUtil.readAllLines(FILE_NAME);
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts.length >= 7 && Integer.parseInt(parts[0]) == id) {
-                return new Vehicle(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]), parts[4], Integer.parseInt(parts[5]), parts[6]);
+            if (parts.length >= 6 && Integer.parseInt(parts[0]) == id) {
+                return new Vehicle(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]), parts[4], parts[5]);
             }
         }
         return null;
@@ -35,9 +35,9 @@ public class VehicleDAOImpl implements VehicleDAO {
         List<String> updatedLines = new ArrayList<>();
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts.length >= 7 && Integer.parseInt(parts[0]) == vehicle.getId()) {
-                String newLine = vehicle.getId() + "," + vehicle.getMake() + "," + vehicle.getModel() + "," + vehicle.getYear() + "," +
-                        vehicle.getLicensePlate() + "," + vehicle.getCapacity() + "," + vehicle.getStatus();
+            if (parts.length >= 6 && Integer.parseInt(parts[0]) == vehicle.getId()) {
+                String newLine = vehicle.getId() + "," + vehicle.getVehicleName() + "," + vehicle.getModel() + "," + vehicle.getYear() + "," +
+                        vehicle.getLicensePlate() + "," + vehicle.getStatus();
                 updatedLines.add(newLine);
             } else {
                 updatedLines.add(line);
@@ -52,7 +52,7 @@ public class VehicleDAOImpl implements VehicleDAO {
         List<String> updatedLines = new ArrayList<>();
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts.length >= 7 && Integer.parseInt(parts[0]) != id) {
+            if (parts.length >= 6 && Integer.parseInt(parts[0]) != id) {
                 updatedLines.add(line);
             }
         }
@@ -65,8 +65,8 @@ public class VehicleDAOImpl implements VehicleDAO {
         List<String> lines = FileUtil.readAllLines(FILE_NAME);
         for (String line : lines) {
             String[] parts = line.split(",");
-            if (parts.length >= 7) {
-                vehicles.add(new Vehicle(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]), parts[4], Integer.parseInt(parts[5]), parts[6]));
+            if (parts.length >= 6) {
+                vehicles.add(new Vehicle(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]), parts[4], parts[5]));
             }
         }
         return vehicles;

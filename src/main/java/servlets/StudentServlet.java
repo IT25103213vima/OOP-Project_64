@@ -17,8 +17,8 @@ import java.sql.Date;
 import java.util.List;
 
 public class StudentServlet extends HttpServlet {
-    private StudentDAO studentDAO = new StudentDAOImpl();
-    private UserDAO userDAO = new UserDAOImpl();
+    private final StudentDAO studentDAO = new StudentDAOImpl();
+    private final UserDAO userDAO = new UserDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +34,10 @@ public class StudentServlet extends HttpServlet {
             request.getRequestDispatcher("admin/editStudent.jsp").forward(request, response);
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
+            Student student = studentDAO.read(id);
+            if (student != null) {
+                userDAO.delete(student.getUserId());
+            }
             studentDAO.delete(id);
             response.sendRedirect("StudentServlet?action=list");
         } else if ("add".equals(action)) {
@@ -42,7 +46,7 @@ public class StudentServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
         if ("add".equals(action)) {
             // Create user first

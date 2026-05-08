@@ -4,9 +4,15 @@ import dao.InstructorDAO;
 import dao.InstructorDAOImpl;
 import dao.LessonDAO;
 import dao.LessonDAOImpl;
+import dao.StudentDAO;
+import dao.StudentDAOImpl;
+import dao.VehicleDAO;
+import dao.VehicleDAOImpl;
 import models.Instructor;
 import models.Lesson;
+import models.Student;
 import models.User;
+import models.Vehicle;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -17,8 +23,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class InstructorDashboardServlet extends HttpServlet {
-    private InstructorDAO instructorDAO = new InstructorDAOImpl();
-    private LessonDAO lessonDAO = new LessonDAOImpl();
+    private final InstructorDAO instructorDAO = new InstructorDAOImpl();
+    private final LessonDAO lessonDAO = new LessonDAOImpl();
+    private final StudentDAO studentDAO = new StudentDAOImpl();
+    private final VehicleDAO vehicleDAO = new VehicleDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +39,12 @@ public class InstructorDashboardServlet extends HttpServlet {
 
         Instructor instructor = instructorDAO.findByUserId(user.getId());
         List<Lesson> lessons = lessonDAO.getByInstructorId(instructor.getId());
+        List<Student> students = studentDAO.getAll();
+        List<Vehicle> vehicles = vehicleDAO.getAll();
 
         request.setAttribute("lessons", lessons);
+        request.setAttribute("students", students);
+        request.setAttribute("vehicles", vehicles);
         request.getRequestDispatcher("instructorDashboard.jsp").forward(request, response);
     }
 }
