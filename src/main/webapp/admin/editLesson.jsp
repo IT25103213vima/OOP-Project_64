@@ -1,77 +1,99 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit Lesson</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .form-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; }
-        input, select { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        .button-container { display: flex; gap: 10px; margin-top: 20px; }
-        button { flex: 1; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        .back-btn { background: #6c757d; text-decoration: none; padding: 10px; border-radius: 4px; text-align: center; color: white; font-weight: bold; }
-        .back-btn:hover { background: #5a6268; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Lesson - DSMS</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
 </head>
 <body>
-    <div class="form-container">
-        <h2>Edit Lesson</h2>
-        <form action="LessonServlet?action=update" method="post">
-            <input type="hidden" name="id" value="${lesson.id}">
+    <div class="app-shell">
+        <%@ include file="/includes/sidebar.jsp" %>
+        <main class="main-area">
+            <div class="container-sm">
+                <div class="form-container">
+            <h1>📚 Edit Lesson</h1>
+            <p class="text-muted mb-4">Update lesson details</p>
 
-            <label for="studentId">Student</label>
-            <select id="studentId" name="studentId" required>
-                <option value="">-- Select Student --</option>
-                <c:forEach var="student" items="${students}">
-                    <option value="${student.id}" ${student.id == lesson.studentId ? 'selected' : ''}>
-                        ${student.firstName} ${student.lastName}
-                    </option>
-                </c:forEach>
-            </select>
+            <form action="${pageContext.request.contextPath}/LessonServlet?action=update" method="post">
+                <input type="hidden" name="id" value="${lesson.id}">
 
-            <label for="instructorId">Instructor</label>
-            <select id="instructorId" name="instructorId" required>
-                <option value="">-- Select Instructor --</option>
-                <c:forEach var="instructor" items="${instructors}">
-                    <option value="${instructor.id}" ${instructor.id == lesson.instructorId ? 'selected' : ''}>
-                        ${instructor.firstName} ${instructor.lastName}
-                    </option>
-                </c:forEach>
-            </select>
+                <div class="form-group">
+                    <label for="studentId">Student *</label>
+                    <select id="studentId" name="studentId" required>
+                        <option value="">-- Select Student --</option>
+                        <c:forEach var="student" items="${students}">
+                            <option value="${student.id}" ${student.id == lesson.studentId ? 'selected' : ''}>
+                                ${student.firstName} ${student.lastName}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-            <label for="vehicleId">Vehicle</label>
-            <select id="vehicleId" name="vehicleId" required>
-                <option value="">-- Select Vehicle --</option>
-                <c:forEach var="vehicle" items="${vehicles}">
-                    <option value="${vehicle.id}" ${vehicle.id == lesson.vehicleId ? 'selected' : ''}>
-                        ${vehicle.vehicleName} ${vehicle.model} (${vehicle.licensePlate})
-                    </option>
-                </c:forEach>
-            </select>
+                <div class="form-group">
+                    <label for="instructorId">Instructor *</label>
+                    <select id="instructorId" name="instructorId" required>
+                        <option value="">-- Select Instructor --</option>
+                        <c:forEach var="instructor" items="${instructors}">
+                            <option value="${instructor.id}" ${instructor.id == lesson.instructorId ? 'selected' : ''}>
+                                ${instructor.firstName} ${instructor.lastName}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-            <label for="lessonDate">Lesson Date</label>
-            <input type="date" id="lessonDate" name="lessonDate" value="${lesson.lessonDate}" required>
+                <div class="form-group">
+                    <label for="vehicleId">Vehicle *</label>
+                    <select id="vehicleId" name="vehicleId" required>
+                        <option value="">-- Select Vehicle --</option>
+                        <c:forEach var="vehicle" items="${vehicles}">
+                            <option value="${vehicle.id}" ${vehicle.id == lesson.vehicleId ? 'selected' : ''}>
+                                ${vehicle.vehicleName} ${vehicle.model} (${vehicle.licensePlate})
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
 
-            <label for="lessonTime">Lesson Time</label>
-            <input type="time" id="lessonTime" name="lessonTime" value="${lesson.lessonTime}" required>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="lessonDate">Lesson Date *</label>
+                            <input type="date" id="lessonDate" name="lessonDate" value="${lesson.lessonDate}" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="lessonTime">Lesson Time *</label>
+                            <input type="time" id="lessonTime" name="lessonTime" value="${lesson.lessonTime}" required>
+                        </div>
+                    </div>
+                </div>
 
-            <label for="status">Status</label>
-            <select id="status" name="status" required>
-                <option value="scheduled" ${lesson.status == 'scheduled' ? 'selected' : ''}>Scheduled</option>
-                <option value="completed" ${lesson.status == 'completed' ? 'selected' : ''}>Completed</option>
-                <option value="cancelled" ${lesson.status == 'cancelled' ? 'selected' : ''}>Cancelled</option>
-            </select>
+                <div class="form-group">
+                    <label for="status">Status *</label>
+                    <select id="status" name="status" required>
+                        <option value="Pending" ${lesson.status == 'Pending' ? 'selected' : ''}>Pending</option>
+                        <option value="Completed" ${lesson.status == 'Completed' ? 'selected' : ''}>Completed</option>
+                        <option value="Cancelled" ${lesson.status == 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                    </select>
+                </div>
 
-            <label for="notes">Notes</label>
-            <input type="text" id="notes" name="notes" value="${lesson.notes}">
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes">${lesson.notes}</textarea>
+                </div>
 
-            <div class="button-container">
-                <button type="submit">Update Lesson</button>
-                <a href="LessonServlet?action=list" class="back-btn">Back to Dashboard</a>
+                <div class="d-flex gap-2" style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">✓ Update Lesson</button>
+                    <a href="${pageContext.request.contextPath}/LessonServlet?action=list" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+                </div>
+            </form>
+                </div>
             </div>
-        </form>
+        </main>
     </div>
 </body>
 </html>

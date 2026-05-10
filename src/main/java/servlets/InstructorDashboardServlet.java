@@ -22,7 +22,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class InstructorDashboardServlet extends HttpServlet {
+public class
+
+InstructorDashboardServlet extends HttpServlet {
     private final InstructorDAO instructorDAO = new InstructorDAOImpl();
     private final LessonDAO lessonDAO = new LessonDAOImpl();
     private final StudentDAO studentDAO = new StudentDAOImpl();

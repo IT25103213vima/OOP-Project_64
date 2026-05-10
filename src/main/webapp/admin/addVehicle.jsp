@@ -1,36 +1,69 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Add Vehicle</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .form-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; }
-        input, select { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        .button-container { display: flex; gap: 10px; margin-top: 20px; }
-        button { flex: 1; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        .back-btn { background: #6c757d; text-decoration: none; padding: 10px; border-radius: 4px; text-align: center; color: white; font-weight: bold; }
-        .back-btn:hover { background: #5a6268; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vehicle - DSMS</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
 </head>
 <body>
-    <div class="form-container">
-        <h2>Add New Vehicle</h2>
-        <form action="VehicleServlet?action=add" method="post">
-            <input type="text" name="vehicleName" placeholder="Vehicle Name" required>
-            <input type="text" name="model" placeholder="Model" required>
-            <input type="number" name="year" placeholder="Year" required>
-            <input type="text" name="licensePlate" placeholder="License Plate" required>
-            <select name="status">
-                <option value="available">Available</option>
-                <option value="maintenance">Maintenance</option>
-                <option value="out_of_service">Out of Service</option>
-            </select>
-            <div class="button-container">
-                <button type="submit">Add Vehicle</button>
-                <a href="VehicleServlet?action=list" class="back-btn">Back to Dashboard</a>
-            </div>
-        </form>
+    <div class="navbar">
+        <div class="navbar-brand">➕ Add New Vehicle</div>
+        <div class="navbar-menu">
+            <a href="${pageContext.request.contextPath}/VehicleServlet?action=list" class="back-btn">← Back to List</a>
+        </div>
+    </div>
+
+    <div class="container-sm">
+        <div class="form-container">
+            <h1>🚗 Add New Vehicle</h1>
+            <p class="text-muted mb-4">Register a new vehicle in the system</p>
+
+            <form action="${pageContext.request.contextPath}/VehicleServlet?action=add" method="post">
+                <div class="form-group">
+                    <label for="vehicleName">Vehicle Name *</label>
+                    <input type="text" id="vehicleName" name="vehicleName" placeholder="e.g., Toyota Corolla" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="model">Model *</label>
+                    <input type="text" id="model" name="model" placeholder="e.g., 2023" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="year">Year *</label>
+                            <input type="number" id="year" name="year" placeholder="2023" min="1990" max="2099" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="licensePlate">License Plate *</label>
+                            <input type="text" id="licensePlate" name="licensePlate" placeholder="XYZ123" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status *</label>
+                    <select id="status" name="status" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="Available">Available</option>
+                        <option value="In Use">In Use</option>
+                        <option value="Maintenance">Maintenance</option>
+                        <option value="Out of Service">Out of Service</option>
+                    </select>
+                </div>
+
+                <div class="d-flex gap-2" style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-success" style="flex: 1;">✓ Add Vehicle</button>
+                    <a href="${pageContext.request.contextPath}/VehicleServlet?action=list" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

@@ -87,10 +87,24 @@
     <url-pattern>/InstructorDashboardServlet</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>AdminDashboardServlet</servlet-name>
+    <servlet-class>servlets.AdminDashboardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminDashboardServlet</servlet-name>
+    <url-pattern>/AdminDashboardServlet</url-pattern>
+  </servlet-mapping>
+
   <!-- Session Config -->
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+
+  <!-- Welcome File -->
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
 
   <!-- Filters -->
   <filter>

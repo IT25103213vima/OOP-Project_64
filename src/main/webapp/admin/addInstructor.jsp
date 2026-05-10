@@ -1,35 +1,81 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Add Instructor</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .form-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; }
-        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        .button-container { display: flex; gap: 10px; margin-top: 20px; }
-        button { flex: 1; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        .back-btn { background: #6c757d; text-decoration: none; padding: 10px; border-radius: 4px; text-align: center; color: white; font-weight: bold; }
-        .back-btn:hover { background: #5a6268; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Instructor - DSMS</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
 </head>
 <body>
-    <div class="form-container">
-        <h2>Add New Instructor</h2>
-        <form action="InstructorServlet?action=add" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="text" name="firstName" placeholder="First Name" required>
-            <input type="text" name="lastName" placeholder="Last Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="phone" placeholder="Phone">
-            <input type="text" name="address" placeholder="Address">
-            <input type="text" name="licenseNumber" placeholder="License Number" required>
-            <div class="button-container">
-                <button type="submit">Add Instructor</button>
-                <a href="InstructorServlet?action=list" class="back-btn">Back to Dashboard</a>
+    <div class="app-shell">
+        <%@ include file="/includes/sidebar.jsp" %>
+        <main class="main-area">
+            <div class="container-sm">
+                <div class="form-container">
+            <h1>➕ Add New Instructor</h1>
+            <p class="text-muted mb-4">Fill in the form below to add a new instructor</p>
+
+            <form action="${pageContext.request.contextPath}/InstructorServlet?action=add" method="post">
+                <div class="form-group">
+                    <label for="username">Username *</label>
+                    <input type="text" id="username" name="username" placeholder="Unique username" required autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" placeholder="Secure password" required autocomplete="new-password">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="instructor@example.com" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="licenseNumber">License Number *</label>
+                            <input type="text" id="licenseNumber" name="licenseNumber" placeholder="DL123456" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Street address">
+                </div>
+
+                <div class="d-flex gap-2" style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-success" style="flex: 1;">✓ Add Instructor</button>
+                    <a href="${pageContext.request.contextPath}/InstructorServlet?action=list" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+                </div>
+            </form>
+                </div>
             </div>
-        </form>
+        </main>
     </div>
 </body>
 </html>

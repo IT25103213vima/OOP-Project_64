@@ -1,46 +1,78 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Edit Payment</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .form-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 400px; }
-        input, select { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-        .button-container { display: flex; gap: 10px; margin-top: 20px; }
-        button { flex: 1; padding: 10px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        .back-btn { background: #6c757d; text-decoration: none; padding: 10px; border-radius: 4px; text-align: center; color: white; font-weight: bold; }
-        .back-btn:hover { background: #5a6268; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Payment - DSMS</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
 </head>
 <body>
-    <div class="form-container">
-        <h2>Edit Payment</h2>
-        <form action="PaymentServlet?action=update" method="post">
-            <input type="hidden" name="id" value="${payment.id}">
-            <label for="studentId">Student</label>
-            <select id="studentId" name="studentId" required>
-                <option value="">-- Select Student --</option>
-                <c:forEach var="student" items="${students}">
-                    <option value="${student.id}" ${student.id == payment.studentId ? 'selected' : ''}>
-                        ${student.firstName} ${student.lastName}
-                    </option>
-                </c:forEach>
-            </select>
-            <input type="number" step="0.01" name="amount" value="${payment.amount}" required>
-            <input type="date" name="paymentDate" value="${payment.paymentDate}" required>
-            <select name="paymentMethod">
-                <option value="cash" ${payment.paymentMethod == 'cash' ? 'selected' : ''}>Cash</option>
-                <option value="card" ${payment.paymentMethod == 'card' ? 'selected' : ''}>Card</option>
-                <option value="online" ${payment.paymentMethod == 'online' ? 'selected' : ''}>Online</option>
-            </select>
-            <input type="text" name="description" value="${payment.description}">
-            <div class="button-container">
-                <button type="submit">Update Payment</button>
-                <a href="PaymentServlet?action=list" class="back-btn">Back to Dashboard</a>
-            </div>
-        </form>
+    <div class="navbar">
+        <div class="navbar-brand">✏️ Edit Payment</div>
+        <div class="navbar-menu">
+            <a href="${pageContext.request.contextPath}/PaymentServlet?action=list" class="back-btn">← Back to List</a>
+        </div>
+    </div>
+
+    <div class="container-sm">
+        <div class="form-container">
+            <h1>💳 Edit Payment</h1>
+            <p class="text-muted mb-4">Update payment information</p>
+
+            <form action="${pageContext.request.contextPath}/PaymentServlet?action=update" method="post">
+                <input type="hidden" name="id" value="${payment.id}">
+
+                <div class="form-group">
+                    <label for="studentId">Student *</label>
+                    <select id="studentId" name="studentId" required>
+                        <option value="">-- Select Student --</option>
+                        <c:forEach var="student" items="${students}">
+                            <option value="${student.id}" ${student.id == payment.studentId ? 'selected' : ''}>
+                                ${student.firstName} ${student.lastName}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount ($) *</label>
+                    <input type="number" id="amount" step="0.01" name="amount" value="${payment.amount}" min="0" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="paymentDate">Payment Date *</label>
+                            <input type="date" id="paymentDate" name="paymentDate" value="${payment.paymentDate}" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="paymentMethod">Payment Method *</label>
+                            <select id="paymentMethod" name="paymentMethod" required>
+                                <option value="Cash" ${payment.paymentMethod == 'Cash' ? 'selected' : ''}>Cash</option>
+                                <option value="Card" ${payment.paymentMethod == 'Card' ? 'selected' : ''}>Card</option>
+                                <option value="Bank Transfer" ${payment.paymentMethod == 'Bank Transfer' ? 'selected' : ''}>Bank Transfer</option>
+                                <option value="Online" ${payment.paymentMethod == 'Online' ? 'selected' : ''}>Online</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description">${payment.description}</textarea>
+                </div>
+
+                <div class="d-flex gap-2" style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">✓ Update Payment</button>
+                    <a href="${pageContext.request.contextPath}/PaymentServlet?action=list" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
