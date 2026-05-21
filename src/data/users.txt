@@ -4,5 +4,3 @@
 6,kasun,kasun123,instructor
 7,admin,admin123,student
 8,admin,admin123,instructor
-
-9,yasasmadagedara,Yasas123@,student
