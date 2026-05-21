@@ -1,0 +1,49 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driving School Management System</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
+</head>
+<body class="landing-page">
+    <div class="landing-shell">
+        <header class="landing-topbar">
+            <div class="landing-brand">
+                <div class="landing-logo">DS</div>
+                <div>
+                    <div class="landing-title">DSMS</div>
+                    <div class="landing-subtitle">Driving School Management System</div>
+                </div>
+            </div>
+            <a href="${pageContext.request.contextPath}/login.jsp" class="landing-nav-btn">Login</a>
+        </header>
+
+        <main class="landing-grid">
+            <section class="landing-hero card fade-in-up">
+                <span class="landing-badge">Modern • Secure • Simple</span>
+                <h1>Manage driving lessons, students, instructors and payments with ease.</h1>
+                <p>
+                    A clean, modern driving school system designed for fast daily work and easy navigation.
+                </p>
+                <div class="landing-actions">
+                    <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-primary btn-lg">Login</a>
+                </div>
+            </section>
+
+            <aside class="landing-card card fade-in-up">
+                <h2>Start here</h2>
+                <ul class="landing-points">
+                    <li>Simple dashboard flow</li>
+                    <li>Clear management pages</li>
+                    <li>Styled buttons and tables</li>
+                    <li>Built for servlet/JSP workflows</li>
+                </ul>
+            </aside>
+        </main>
+    </div>
+</body>
+</html>
+

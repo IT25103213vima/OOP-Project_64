@@ -1,18 +1,6 @@
 # ===================
 # Maven Build Files
-# ===================
-/target/
-*.jar
-*.war
-*.ear
-*.zip
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-.flattened-pom.xml
+# ==================
 
 # ===================
 # IDE and Editor Files

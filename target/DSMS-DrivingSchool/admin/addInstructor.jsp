@@ -1,0 +1,90 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Instructor - DSMS</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
+</head>
+<body>
+    <div class="app-shell">
+        <%@ include file="/includes/sidebar.jsp" %>
+        <main class="main-area">
+            <div class="container-sm">
+                <div class="form-container">
+            <h1>➕ Add New Instructor</h1>
+            <p class="text-muted mb-4">Fill in the form below to add a new instructor</p>
+
+            <form id="instructorAddForm" action="${pageContext.request.contextPath}/InstructorServlet?action=add" method="post">
+                <div class="form-group">
+                    <label for="username">Username *</label>
+                    <input type="text" id="username" name="username" placeholder="Unique username" required pattern="[A-Za-z]+" title="Username must contain letters only" autocomplete="off">
+                    <small class="field-error" id="usernameError"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" placeholder="Secure password" required minlength="8" autocomplete="new-password">
+                    <small class="field-error" id="passwordError"></small>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="First name" required pattern="[A-Za-z]+" title="First name must contain letters only">
+                            <small class="field-error" id="firstNameError"></small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last name" required pattern="[A-Za-z]+" title="Last name must contain letters only">
+                            <small class="field-error" id="lastNameError"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="instructor@example.com" required title="Please enter a valid email address">
+                    <small class="field-error" id="emailError"></small>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                            <small class="field-error" id="phoneError"></small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="licenseNumber">License Number *</label>
+                            <input type="text" id="licenseNumber" name="licenseNumber" placeholder="DL123456" required>
+                            <small class="field-error" id="licenseNumberError"></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Street address">
+                </div>
+
+                <div class="d-flex gap-2" style="margin-top: 2rem;">
+                    <button type="submit" class="btn btn-success" style="flex: 1;">✓ Add Instructor</button>
+                    <a href="${pageContext.request.contextPath}/InstructorServlet?action=list" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+                </div>
+            </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Load global app JS (form validation etc) -->
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
+</body>
+</html>
