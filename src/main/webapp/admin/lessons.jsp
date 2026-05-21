@@ -8,6 +8,7 @@
     <title>Manage Lessons - DSMS</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 </head>
 <body>
     <div class="app-shell">
@@ -79,7 +80,7 @@
                             </td>
                             <td style="white-space: nowrap;">
                                 <a href="${pageContext.request.contextPath}/LessonServlet?action=edit&id=${lesson.id}" class="action-btn edit-btn">Edit</a>
-                                <a href="${pageContext.request.contextPath}/LessonServlet?action=delete&id=${lesson.id}" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this lesson?')">Delete</a>
+                                <a href="${pageContext.request.contextPath}/LessonServlet?action=delete&id=${lesson.id}" class="action-btn delete-btn">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

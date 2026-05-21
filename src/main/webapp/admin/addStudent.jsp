@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,55 +18,66 @@
             <h1>➕ Add New Student</h1>
             <p class="text-muted mb-4">Fill in the form below to add a new student</p>
 
-            <form action="${pageContext.request.contextPath}/StudentServlet?action=add" method="post">
+            <c:if test="${not empty validationError}">
+                <div class="alert alert-danger">${validationError}</div>
+            </c:if>
+
+            <form id="studentAddForm" action="${pageContext.request.contextPath}/StudentServlet?action=add" method="post" novalidate>
                 <div class="form-group">
                     <label for="username">Username *</label>
-                    <input type="text" id="username" name="username" placeholder="Unique username" required autocomplete="off">
+                    <input type="text" id="username" name="username" placeholder="Unique username" required pattern="[A-Za-z]+" title="Username must contain letters only" autocomplete="off" value="${param.username}">
+                    <small class="field-error" id="usernameError"><c:out value="${fieldErrors.username}"/></small>
                 </div>
 
                 <div class="form-group">
                     <label for="password">Password *</label>
-                    <input type="password" id="password" name="password" placeholder="Secure password" required autocomplete="new-password">
+                    <input type="password" id="password" name="password" placeholder="Start with a capital letter and include a number or special character" required minlength="8" pattern="^(?=[A-Z])(?=.*[0-9!@#$%^&*]).{8,}$" title="Password must start with a capital letter and include at least one number or special character" autocomplete="new-password">
+                    <small class="field-error" id="passwordError"><c:out value="${fieldErrors.password}"/></small>
                 </div>
 
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+                            <input type="text" id="firstName" name="firstName" placeholder="First name" required pattern="[A-Za-z]+" title="First name must contain letters only" value="${param.firstName}">
+                            <small class="field-error" id="firstNameError"><c:out value="${fieldErrors.firstName}"/></small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last name" required pattern="[A-Za-z]+" title="Last name must contain letters only" value="${param.lastName}">
+                            <small class="field-error" id="lastNameError"><c:out value="${fieldErrors.lastName}"/></small>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" placeholder="student@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="student@example.com" required pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" title="Enter a valid email address" value="${param.email}">
+                    <small class="field-error" id="emailError"><c:out value="${fieldErrors.email}"/></small>
                 </div>
 
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="10 digit phone number" required pattern="[0-9]{10}" minlength="10" maxlength="10" inputmode="numeric" title="Phone number must be exactly 10 digits" value="${param.phone}">
+                            <small class="field-error" id="phoneError"><c:out value="${fieldErrors.phone}"/></small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="dob">Date of Birth *</label>
-                            <input type="date" id="dob" name="dob" required>
+                            <input type="date" id="dob" name="dob" required value="${param.dob}">
+                            <small class="field-error" id="dobError"><c:out value="${fieldErrors.dob}"/></small>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" id="address" name="address" placeholder="Street address">
+                    <input type="text" id="address" name="address" placeholder="Street address" value="${param.address}">
                 </div>
 
                 <div class="d-flex gap-2" style="margin-top: 2rem;">
@@ -76,6 +88,8 @@
                 </div>
             </div>
         </main>
+        <!-- Include global app JS which provides live validation across forms -->
+        <script src="${pageContext.request.contextPath}/js/app.js"></script>
     </div>
 </body>
 </html>

@@ -20,24 +20,39 @@
             <form action="${pageContext.request.contextPath}/InstructorServlet?action=update" method="post">
                 <input type="hidden" name="id" value="${instructor.id}">
 
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" value="${user.username}" readonly disabled>
+                    <small class="text-muted">Username cannot be changed</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">New Password</label>
+                    <input type="password" id="password" name="password" placeholder="Leave blank to keep current password" autocomplete="new-password">
+                    <small class="text-muted">Only fill if you want to change the password</small>
+                </div>
+
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" value="${instructor.firstName}" required>
+                            <input type="text" id="firstName" name="firstName" value="${instructor.firstName}" required pattern="[A-Za-z]+" title="First name must contain letters only">
+                            <small class="field-error" id="firstNameError"></small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" value="${instructor.lastName}" required>
+                            <input type="text" id="lastName" name="lastName" value="${instructor.lastName}" required pattern="[A-Za-z]+" title="Last name must contain letters only">
+                            <small class="field-error" id="lastNameError"></small>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" value="${instructor.email}" required>
+                    <input type="email" id="email" name="email" value="${instructor.email}" required title="Please enter a valid email address">
+                    <small class="field-error" id="emailError"></small>
                 </div>
 
                 <div class="row">

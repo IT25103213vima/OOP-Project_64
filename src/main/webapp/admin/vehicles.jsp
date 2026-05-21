@@ -8,6 +8,7 @@
     <title>Manage Vehicles - DSMS</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 </head>
 <body>
     <div class="app-shell">
@@ -55,7 +56,7 @@
                             </td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/VehicleServlet?action=edit&id=${vehicle.id}" class="action-btn edit-btn">Edit</a>
-                                <a href="${pageContext.request.contextPath}/VehicleServlet?action=delete&id=${vehicle.id}" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this vehicle?')">Delete</a>
+                                <a href="${pageContext.request.contextPath}/VehicleServlet?action=delete&id=${vehicle.id}" class="action-btn delete-btn">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

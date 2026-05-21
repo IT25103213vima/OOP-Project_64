@@ -8,6 +8,7 @@
     <title>Manage Instructors - DSMS</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 </head>
 <body>
     <div class="app-shell">
@@ -39,7 +40,7 @@
                             <td>${instructor.licenseNumber}</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/InstructorServlet?action=edit&id=${instructor.id}" class="action-btn edit-btn">Edit</a>
-                                <a href="${pageContext.request.contextPath}/InstructorServlet?action=delete&id=${instructor.id}" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this instructor?')">Delete</a>
+                                <a href="${pageContext.request.contextPath}/InstructorServlet?action=delete&id=${instructor.id}" class="action-btn delete-btn">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

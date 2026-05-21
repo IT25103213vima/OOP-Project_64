@@ -17,10 +17,11 @@
             <h1>➕ Add New Instructor</h1>
             <p class="text-muted mb-4">Fill in the form below to add a new instructor</p>
 
-            <form action="${pageContext.request.contextPath}/InstructorServlet?action=add" method="post">
+            <form id="instructorAddForm" action="${pageContext.request.contextPath}/InstructorServlet?action=add" method="post">
                 <div class="form-group">
                     <label for="username">Username *</label>
-                    <input type="text" id="username" name="username" placeholder="Unique username" required autocomplete="off">
+                    <input type="text" id="username" name="username" placeholder="Unique username" required pattern="[A-Za-z]+" title="Username must contain letters only" autocomplete="off">
+                    <small class="field-error" id="usernameError"></small>
                 </div>
 
                 <div class="form-group">
@@ -32,33 +33,38 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
-                            <input type="text" id="firstName" name="firstName" placeholder="First name" required>
+                            <input type="text" id="firstName" name="firstName" placeholder="First name" required pattern="[A-Za-z]+" title="First name must contain letters only">
+                            <small class="field-error" id="firstNameError"></small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="lastName">Last Name *</label>
-                            <input type="text" id="lastName" name="lastName" placeholder="Last name" required>
+                            <input type="text" id="lastName" name="lastName" placeholder="Last name" required pattern="[A-Za-z]+" title="Last name must contain letters only">
+                            <small class="field-error" id="lastNameError"></small>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" placeholder="instructor@example.com" required>
+                    <input type="email" id="email" name="email" placeholder="instructor@example.com" required title="Please enter a valid email address">
+                    <small class="field-error" id="emailError"></small>
                 </div>
 
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                            <small class="field-error" id="phoneError"></small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="licenseNumber">License Number *</label>
                             <input type="text" id="licenseNumber" name="licenseNumber" placeholder="DL123456" required>
+                            <small class="field-error" id="licenseNumberError"></small>
                         </div>
                     </div>
                 </div>

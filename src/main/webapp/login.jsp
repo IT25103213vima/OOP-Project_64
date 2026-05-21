@@ -67,6 +67,17 @@
             background-color: #f0f7ff;
         }
 
+        /* Ensure validation error text is visible and red on this page
+           (higher specificity and placed after external CSS to override caching or other rules) */
+        .field-error {
+            color: #dc3545 !important; /* matches --danger-color in global CSS */
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: block;
+            margin-top: 0.45rem;
+            min-height: 1.1rem;
+        }
+
         .login-btn {
             width: 100%;
             padding: 0.85rem;
@@ -134,7 +145,8 @@
         <form action="LoginServlet" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="off">
+                <input type="text" id="username" name="username" placeholder="Enter your username" required pattern="[A-Za-z]+" title="Username must contain letters only" autocomplete="off">
+                <small class="field-error" id="usernameError"></small>
             </div>
 
             <div class="form-group">
@@ -154,6 +166,8 @@
         <div class="back-link">
             <a href="index.jsp">← Back to Home</a>
         </div>
+        <!-- load global app JS (form validation etc) -->
+        <script src="${pageContext.request.contextPath}/js/app.js"></script>
     </div>
 </body>
 </html>

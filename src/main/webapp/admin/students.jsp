@@ -8,6 +8,7 @@
     <title>Manage Students - DSMS</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/animations.css">
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 </head>
 <body>
     <div class="app-shell">
@@ -39,7 +40,7 @@
                             <td>${student.phone}</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/StudentServlet?action=edit&id=${student.id}" class="action-btn edit-btn">Edit</a>
-                                <a href="${pageContext.request.contextPath}/StudentServlet?action=delete&id=${student.id}" class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+                                <a href="${pageContext.request.contextPath}/StudentServlet?action=delete&id=${student.id}" class="action-btn delete-btn">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

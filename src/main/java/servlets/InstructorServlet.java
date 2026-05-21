@@ -29,7 +29,9 @@ public class InstructorServlet extends HttpServlet {
         } else if ("edit".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             Instructor instructor = instructorDAO.read(id);
+            User user = userDAO.read(instructor.getUserId());
             request.setAttribute("instructor", instructor);
+            request.setAttribute("user", user);
             request.getRequestDispatcher("admin/editInstructor.jsp").forward(request, response);
         } else if ("delete".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -53,8 +55,7 @@ public class InstructorServlet extends HttpServlet {
             String password = request.getParameter("password");
             User user = new User(0, username, password, "instructor");
             userDAO.create(user);
-            // Get the created user id
-            User createdUser = userDAO.findByUsername(username);
+            // user.getId() is already set by create() method
 
             // Create instructor
             String firstName = request.getParameter("firstName");
@@ -65,7 +66,7 @@ public class InstructorServlet extends HttpServlet {
             Date hireDate = new Date(System.currentTimeMillis());
             String licenseNumber = request.getParameter("licenseNumber");
 
-            Instructor instructor = new Instructor(0, createdUser.getId(), firstName, lastName, email, phone, address, hireDate, licenseNumber);
+            Instructor instructor = new Instructor(0, user.getId(), firstName, lastName, email, phone, address, hireDate, licenseNumber);
             instructorDAO.create(instructor);
             response.sendRedirect("InstructorServlet?action=list");
         } else if ("update".equals(action)) {
@@ -78,6 +79,15 @@ public class InstructorServlet extends HttpServlet {
             instructor.setAddress(request.getParameter("address"));
             instructor.setLicenseNumber(request.getParameter("licenseNumber"));
             instructorDAO.update(instructor);
+
+            // Update password if provided
+            String newPassword = request.getParameter("password");
+            if (newPassword != null && !newPassword.isEmpty()) {
+                User user = userDAO.read(instructor.getUserId());
+                user.setPassword(newPassword);
+                userDAO.update(user);
+            }
+
             response.sendRedirect("InstructorServlet?action=list");
         }
     }
