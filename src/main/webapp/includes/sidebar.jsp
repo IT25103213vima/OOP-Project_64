@@ -44,7 +44,5 @@
             }catch(e){console.error(e)}
         })();
     </script>
-    <!-- load global app behaviour (form validation, modals, etc) -->
-    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 </aside>
 

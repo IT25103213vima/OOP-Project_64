@@ -7,7 +7,16 @@
           <value>
             <PendingDiffInfo>
               <option name="filePath" value="$PROJECT_DIR$/.gitignore" />
-              <option name="updatedContent" value="# Maven build output&#10;/target/&#10;&#10;# IntelliJ IDEA project metadata&#10;/.idea/*&#10;!/.idea/.gitignore&#10;*.iml&#10;&#10;# SmartTomcat / local server metadata&#10;/.smarttomcat/&#10;" />
+              <option name="updatedContent" value="# Maven build output&#10;/target/&#10;&#10;# IntelliJ IDEA project metadata&#10;/.idea/*&#10;!/.idea/.gitignore&#10;*.iml&#10;&#10;# SmartTomcat / local server metadata&#10;/.smarttomcat/&#10;&#10;# Deployed data directory (data is stored in src/data only)&#10;/src/main/webapp/data/&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/data/users.txt">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/data/users.txt" />
+              <option name="originalContent" value="1,admin,admin123,admin&#10;4,nimal,nimal123,instructor&#10;6,kasun,kasun123,instructor&#10;7,saman,saman123,student&#10;" />
+              <option name="updatedContent" value="1,admin,admin123,admin&#10;4,nimal,nimal123,instructor&#10;5,gihan,gihan123,student&#10;6,kasun,kasun123,instructor&#10;7,admin,admin123,student&#10;8,admin,admin123,instructor&#10;&#10;" />
             </PendingDiffInfo>
           </value>
         </entry>

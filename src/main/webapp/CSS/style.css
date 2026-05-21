@@ -147,57 +147,6 @@ textarea {
   min-height: 100px;
 }
 
-.input-invalid {
-  border-color: var(--danger-color) !important;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.12) !important;
-  background-color: #fff7f7 !important;
-}
-
-/* Validation error text with smooth appearance */
-/* stronger selector and !important to ensure the error text uses the danger color
-   even if other styles (page-level or browser defaults) interfere */
-.login-container .field-error,
-.field-error {
-  /* always reserve space under the input so layout doesn't jump */
-  display: block;
-  margin-top: 0.45rem;
-  color: var(--danger-color) !important;
-  font-size: 0.9rem;
-  font-weight: 500;
-  min-height: 1.1rem;
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 180ms ease, transform 180ms ease;
-  visibility: hidden;
-}
-
-/* show when there is text (set by server or client JS) */
-.field-error:not(:empty) {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-}
-
-/* strong show for input elements marked invalid by JS/CSS */
-input.input-invalid + .field-error,
-textarea.input-invalid + .field-error,
-select.input-invalid + .field-error {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
-  visibility: visible !important;
-}
-
-/* make the small error text align and stand out */
-.form-group .field-error {
-  margin-left: 2px;
-}
-
-/* Accessibility: focus invalid inputs */
-input.input-invalid:focus, textarea.input-invalid:focus, select.input-invalid:focus {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(220,53,69,0.08);
-}
-
 /* ===== Buttons ===== */
 button,
 .btn,

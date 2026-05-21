@@ -1,2 +1,0 @@
-1,car,nissan,2008,9878,available
-2,bike,honda,2015,8435,available
