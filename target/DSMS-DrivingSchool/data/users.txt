@@ -1,0 +1,5 @@
+4,nimal,nimal123,instructor
+5,gihan,gihan123,student
+6,kasun,kasun123,instructor
+7,admin,admin123,student
+8,admin,admin123,instructor
