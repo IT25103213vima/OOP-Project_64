@@ -1,4 +1,3 @@
-1,admin,admin123,admin
 4,nimal,nimal123,instructor
 5,gihan,gihan123,student
 6,kasun,kasun123,instructor
