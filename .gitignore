@@ -1,15 +1,101 @@
-# Maven build output
+# ===================
+# Maven Build Files
+# ===================
 /target/
+*.jar
+*.war
+*.ear
+*.zip
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
 
-# IntelliJ IDEA project metadata
+# ===================
+# IDE and Editor Files
+# ===================
+# IntelliJ IDEA
 /.idea/*
 !/.idea/.gitignore
 *.iml
+*.iws
+*.ipr
+*.swp
+*.swo
+*~
+.DS_Store
 
-# SmartTomcat / local server metadata
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+.factorypath
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Vim
+.vim/
+*.swp
+
+# ===================
+# Tomcat / Application Server
+# ===================
 /.smarttomcat/
+/.tomcat/
+/tomcat/
 
+# ===================
+# Data Storage
+# ===================
 # Deployed data directory (data is stored in src/data only)
 /src/main/webapp/data/
+
+# ===================
+# OS Files
+# ===================
+.DS_Store
+Thumbs.db
+*.log
+
+# ===================
+# Build and Runtime
+# ===================
+/bin/
+/out/
+*.class
+*.ctxt
+.mtj.tmp/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ===================
+# Gradle
+# ===================
+/gradle/
+.gradle/
+build/
+
+# ===================
+# Maven Wrapper
+# ===================
+.mvn/
+
+# ===================
+# Local Environment Files
+# ===================
+.env
+.env.local
+.env.*.local
 
 
