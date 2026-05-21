@@ -9,3 +9,7 @@
 # SmartTomcat / local server metadata
 /.smarttomcat/
 
+# Deployed data directory (data is stored in src/data only)
+/src/main/webapp/data/
+
+
