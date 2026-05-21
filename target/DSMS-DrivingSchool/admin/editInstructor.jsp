@@ -28,8 +28,9 @@
 
                 <div class="form-group">
                     <label for="password">New Password</label>
-                    <input type="password" id="password" name="password" placeholder="Leave blank to keep current password" autocomplete="new-password">
+                    <input type="password" id="password" name="password" placeholder="Leave blank to keep current password" minlength="8" autocomplete="new-password">
                     <small class="text-muted">Only fill if you want to change the password</small>
+                    <small class="field-error" id="passwordError"></small>
                 </div>
 
                 <div class="row">
@@ -84,5 +85,7 @@
             </div>
         </main>
     </div>
+    <!-- Load global app JS (form validation etc) -->
+    <script src="${pageContext.request.contextPath}/js/app.js"></script>
 </body>
 </html>

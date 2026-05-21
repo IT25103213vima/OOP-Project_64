@@ -130,7 +130,57 @@ function validateInstructorAddForm(event) {
 		valid = false;
 	}
 
-	if (!valid) event.preventDefault();
+	if (!valid) {
+		console.log('Validation failed for instructor add form');
+		event.preventDefault();
+	} else {
+		console.log('Instructor add form validation passed, submitting...');
+	}
+}
+
+function validateInstructorEditForm(event) {
+	const fields = ['password', 'firstName', 'lastName', 'email', 'phone', 'licenseNumber'];
+	clearStudentErrors(fields);
+
+	let valid = true;
+	const password = document.getElementById('password')?.value || '';
+	const firstName = document.getElementById('firstName')?.value || '';
+	const lastName = document.getElementById('lastName')?.value || '';
+	const email = document.getElementById('email')?.value || '';
+	const phone = document.getElementById('phone')?.value || '';
+	const licenseNumber = document.getElementById('licenseNumber')?.value || '';
+
+	if (!isBlank(password) && !validatePassword(password)) {
+		setFieldError('password', 'Password must start with a capital letter and include at least one number or special character.');
+		valid = false;
+	}
+	if (isBlank(firstName) || !validateLettersOnly(firstName)) {
+		setFieldError('firstName', 'First name must contain letters only.');
+		valid = false;
+	}
+	if (isBlank(lastName) || !validateLettersOnly(lastName)) {
+		setFieldError('lastName', 'Last name must contain letters only.');
+		valid = false;
+	}
+	if (isBlank(email) || !validateEmail(email)) {
+		setFieldError('email', 'Please enter a valid email address.');
+		valid = false;
+	}
+	if (!isBlank(phone) && !validatePhone(phone)) {
+		setFieldError('phone', 'Phone number must be exactly 10 digits.');
+		valid = false;
+	}
+	if (isBlank(licenseNumber)) {
+		setFieldError('licenseNumber', 'License number is required.');
+		valid = false;
+	}
+
+	if (!valid) {
+		console.log('Validation failed for instructor edit form');
+		event.preventDefault();
+	} else {
+		console.log('Instructor edit form validation passed, submitting...');
+	}
 }
 
 function validateStudentEditForm(event) {
@@ -272,6 +322,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (instructorAddForm) {
 		instructorAddForm.addEventListener('submit', validateInstructorAddForm);
 		['username', 'password', 'firstName', 'lastName', 'email', 'phone', 'licenseNumber'].forEach(attachLiveClear);
+	}
+
+	// instructor edit form (admin page)
+	const instructorEditForm = document.querySelector('form[action*="InstructorServlet"][method="post"]:not(#instructorAddForm)');
+	if (instructorEditForm) {
+		instructorEditForm.addEventListener('submit', validateInstructorEditForm);
+		['password', 'firstName', 'lastName', 'email', 'phone', 'licenseNumber'].forEach(attachLiveClear);
 	}
 
 	const modal = document.getElementById('deleteConfirmModal');
